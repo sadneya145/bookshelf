@@ -1,29 +1,42 @@
 import React, { useState } from 'react';
 import './BookSearchPage.css';
+import debounce from 'lodash/debounce';
 
 const BookSearchPage = ({ addToBookshelf }) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const [error, setError] = useState('');
 
-  const searchBooks = async () => {
-    if (query.length > 2) {
-      const response = await fetch(`https://openlibrary.org/search.json?q=${query}&limit=10&page=1`);
+  const searchBooks = debounce(async (value) => {
+    if (value.length > 2) {
+      const response = await fetch(`https://openlibrary.org/search.json?q=${value}&limit=10&page=1`);
+      if (!response.ok) {
+        setError('An error occurred while fetching data. Please try again.');
+        setResults([]);
+        return;
+      }
       const data = await response.json();
-      setResults(data.docs);
+      if (data.docs.length === 0) {
+        setError('Book not found. Please try another search term.');
+        setResults([]);
+      } else {
+        setResults(data.docs);
+        setError('');
+      }
     } else {
+      setError('');
       setResults([]);
     }
-  };
+  }, 300);
 
   const handleInputChange = (e) => {
-    setQuery(e.target.value);
-    if (e.target.value.length <= 2) {
-      setResults([]);
-    }
+    const value = e.target.value;
+    setQuery(value);
+    searchBooks(value);
   };
 
   return (
-    <div className="book-search-page">
+    <div>
       <input
         type="text"
         value={query}
@@ -31,19 +44,10 @@ const BookSearchPage = ({ addToBookshelf }) => {
         placeholder="Search for books..."
         className="search-input"
       />
-      <button onClick={searchBooks} className="search-button">Search</button>
+      {error && <div className="error-message">{error}</div>}
       <div className="results-container">
         {results.map((book) => (
           <div key={book.key} className="card">
-            {book.cover_i ? (
-              <img 
-                src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`} 
-                alt={`${book.title} cover`}
-                className="book-cover"
-              />
-            ) : (
-              <div className="no-cover">No Cover</div>
-            )}
             <h3>{book.title}</h3>
             <p>{book.author_name ? book.author_name.join(', ') : 'Unknown Author'}</p>
             <button onClick={() => addToBookshelf(book)}>Add to Bookshelf</button>
