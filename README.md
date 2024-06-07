@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+`README.md` file for your project:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```markdown
+# Book Search and Bookshelf App
 
-## Available Scripts
+This is a React application that allows users to search for books using the Open Library API and manage a personal bookshelf. Users can search for books, view random book recommendations, add books to their bookshelf, and remove books from their bookshelf.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Home Page**: Displays a random selection of 10 books from the Open Library API.
+- **Search Page**: Allows users to search for books by title, author, or keyword and display results dynamically as they type.
+- **Bookshelf Page**: Displays the books that the user has added to their personal bookshelf, with the option to remove books.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Follow these instructions to set up and run the project on your local machine.
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v12 or later)
+- npm (v6 or later)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/your-repository-name.git
+   cd your-repository-name
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Start the development server:
+   ```sh
+   npm start
+   ```
 
-### `npm run eject`
+4. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Project Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `src/`
+  - `components/`
+    - `BookCard.js`: Component for displaying individual book details.
+  - `pages/`
+    - `BookSearchPage.js`: Component for the book search page.
+    - `BookshelfPage.js`: Component for the bookshelf page.
+    - `HomePage.js`: Component for the home page displaying random books.
+  - `App.js`: Main app component that includes routing.
+  - `index.js`: Entry point of the application.
+- `public/`
+  - `index.html`: HTML template.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Home Page
 
-## Learn More
+The home page displays a random selection of 10 books from the Open Library API. Each book is displayed in a card format with its cover image (if available), title, author(s), and a button to add the book to the bookshelf.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Search Page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The search page allows users to search for books by title, author, or keyword. Results are displayed dynamically as the user types. Each result is displayed in a card format with its cover image (if available), title, author(s), and a button to add the book to the bookshelf.
 
-### Code Splitting
+### Bookshelf Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The bookshelf page displays the books that the user has added to their personal bookshelf. Each book is displayed in a card format with its cover image (if available), title, author(s), and a button to remove the book from the bookshelf.
 
-### Analyzing the Bundle Size
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-### Making a Progressive Web App
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-### Advanced Configuration
+## Acknowledgements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- [Open Library API](https://openlibrary.org/developers/api) for providing book data.
+- [React](https://reactjs.org/) for the UI library.
 
-### Deployment
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- GitHub:https://github.com/avanshh99
 
-### `npm run build` fails to minify
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This `README.md` provides an overview of the project, installation instructions, a brief description of the project structure, usage details, and contribution guidelines.
