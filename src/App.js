@@ -29,6 +29,7 @@ const App = () => {
     <Router>
       <div className="app">
         <nav className="navbar">
+          <span className="nav-link ">Book Haven</span>
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/bookshelf" className="nav-link">My Bookshelf</Link>
           <Link to="/search" className="nav-link">Search</Link>
