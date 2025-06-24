@@ -18,7 +18,7 @@ const HomePage = ({ addToBookshelf }) => {
           return;
         }
 
-        const response = await fetch('https://openlibrary.org/search.json?q=random&limit=50');
+        const response = await fetch('https://openlibrary.org/search.json?q=fiction&limit=50');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -38,33 +38,97 @@ const HomePage = ({ addToBookshelf }) => {
   }, []);
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return (
+      <div className="loading-container">
+        <div className="loading-content">
+          <div className="spinner"></div>
+          <p className="loading-text">Discovering amazing books...</p>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="error">Error: {error}</div>;
+    return (
+      <div className="error-container">
+        <div className="error-content">
+          <p className="error-text">Error: {error}</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="home-page">
-      <h2><i>Hola Folks</i> </h2>
-      <div className="results-container">
-        {randomBooks.map((book) => (
-          <div key={book.key} className="card">
-            {book.cover_i ? (
-              <img
-                src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
-                alt={`${book.title} cover`}
-                className="book-cover"
-              />
-            ) : (
-              <div className="no-cover">No Cover</div>
-            )}
-            <h3>{book.title}</h3>
-            <p>{book.author_name ? book.author_name.join(', ') : 'Unknown Author'}</p>
-            <button onClick={() => addToBookshelf(book)}>Add to Bookshelf</button>
+      {/* Hero Section */}
+      <div className="hero-section">
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <h1 className="hero-title">
+            <i>Hola! Geeky Readers</i>
+          </h1>
+          <p className="hero-subtitle">
+            Discover your next favorite book from our curated collection of literary masterpieces
+          </p>
+          <div className="hero-divider"></div>
+        </div>
+      </div>
+
+      {/* Books Grid */}
+      <div className="books-section">
+        <div className="books-container">
+          <div className="books-grid">
+            {randomBooks.map((book, index) => (
+              <div 
+                key={book.key} 
+                className="book-card"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {/* Book Cover */}
+                <div className="book-cover-container">
+                  {book.cover_i ? (
+                    <img
+                      src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
+                      alt={`${book.title} cover`}
+                      className="book-cover"
+                    />
+                  ) : (
+                    <div className="no-cover">
+                      <div className="no-cover-content">
+                        <div className="book-icon">📚</div>
+                        <p className="no-cover-text">No Cover</p>
+                      </div>
+                    </div>
+                  )}
+                  <div className="book-overlay"></div>
+                </div>
+
+                {/* Book Info */}
+                <div className="book-info">
+                  <h3 className="book-title">{book.title}</h3>
+                  <p className="book-author">
+                    {book.author_name ? book.author_name.join(', ') : 'Unknown Author'}
+                  </p>
+                </div>
+
+                {/* Add to Bookshelf Button */}
+                <button 
+                  onClick={() => addToBookshelf(book)}
+                  className="add-button"
+                >
+                  <span className="button-content">
+                    <span>Add to Bookshelf</span>
+                    <span className="button-icon">📖</span>
+                  </span>
+                </button>
+
+                {/* Decorative Elements */}
+                <div className="decoration-1"></div>
+                <div className="decoration-2"></div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
