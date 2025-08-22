@@ -1,107 +1,88 @@
-/* BookSearchPage.css */
+/* ===============================
+   Theme Variables
+================================= */
+/* :root {
+  --color-bg-page: linear-gradient(135deg, #1f2937 0%, #7c3aed 50%, #7c2d12 100%);
+  --color-bg-card: rgba(255, 255, 255, 0.08);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.15);
 
-/* Keyframes for animations */
+  --color-border: rgba(255, 255, 255, 0.2);
+  --color-border-hover: rgba(168, 85, 247, 0.4);
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #d1d5db;
+  --color-text-muted: #9ca3af;
+
+  --color-accent-start: #7c3aed;
+  --color-accent-end: #a855f7;
+  --color-accent-hover: #9333ea;
+} */
+
+/* ===============================
+   Animations
+================================= */
 @keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: calc(200px + 100%) 0;
-  }
-}
-
-/* Main container */
+/* ===============================
+   Page Layout
+================================= */
 .book-search-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1f2937 0%, #7c3aed 50%, #7c2d12 100%);
-  color: white;
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Header section */
+/* ===============================
+   Header
+================================= */
 .search-header {
   padding: 3rem 1.5rem 2rem;
   text-align: center;
-  position: relative;
-}
-
-.header-content {
-  max-width: 48rem;
-  margin: 0 auto;
 }
 
 .page-title {
-  font-size: 3.5rem;
-  font-weight: bold;
+  font-size: 3rem;
+  font-weight: 800;
   background: linear-gradient(to right, #a855f7, #ec4899, #3b82f6);
-  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin: 0 0 1rem 0;
+  margin-bottom: 1rem;
   animation: slideInUp 0.8s ease-out;
 }
 
 .page-subtitle {
   font-size: 1.25rem;
-  color: #d1d5db;
-  margin: 0 0 2rem 0;
-  line-height: 1.6;
+  color: var(--color-text-secondary);
   animation: slideInUp 0.8s ease-out 0.2s both;
 }
 
-.header-divider {
-  width: 6rem;
-  height: 0.25rem;
-  background: linear-gradient(to right, #a855f7, #ec4899);
-  border-radius: 9999px;
-  margin: 0 auto;
-  animation: slideInUp 0.8s ease-out 0.4s both;
-}
-
-/* Search section */
-.search-section {
-  padding: 0 1.5rem 2rem;
-}
-
+/* ===============================
+   Search Bar
+================================= */
 .search-container {
   max-width: 42rem;
-  margin: 0 auto;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .search-input-wrapper {
   position: relative;
-  margin-bottom: 1rem;
 }
 
 .search-icon {
@@ -110,213 +91,100 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.25rem;
-  color: #9ca3af;
-  z-index: 2;
+  color: var(--color-text-muted);
 }
 
 .search-input {
   width: 100%;
   padding: 1rem 1rem 1rem 3.5rem;
-  font-size: 1.125rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid var(--color-border);
   border-radius: 1rem;
-  color: white;
+  color: var(--color-text-primary);
   outline: none;
   transition: all 0.3s ease;
-  box-sizing: border-box;
-}
-
-.search-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
 }
 
 .search-input:focus {
-  border-color: #a855f7;
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
-  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-border-hover);
+  background: rgba(255, 255, 255, 0.18);
 }
 
-.loading-spinner {
-  position: absolute;
-  right: 1.25rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.25rem;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-/* Error message */
-.error-message {
-  background: rgba(239, 68, 68, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 0.75rem;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: #fecaca;
-  font-size: 0.875rem;
-  animation: slideInUp 0.3s ease-out;
-}
-
-.error-icon {
-  font-size: 1.125rem;
-  flex-shrink: 0;
-}
-
-/* Search hint */
-.search-hint {
-  text-align: center;
-  padding: 3rem 2rem;
-  max-width: 32rem;
-  margin: 0 auto;
-}
-
-.hint-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.search-hint p {
-  font-size: 1.125rem;
-  color: #9ca3af;
-  margin: 0;
-}
-
-/* Results section */
-.results-section {
-  padding: 0 1.5rem 4rem;
-}
-
+/* ===============================
+   Results Grid
+================================= */
 .results-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
   max-width: 80rem;
   margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
 }
 
-/* Book card */
+/* ===============================
+   Book Card
+================================= */
 .book-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 1.5rem;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-  animation: fadeInScale 0.6s ease-out forwards;
-  opacity: 0;
+  background: var(--color-bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  animation: fadeInScale 0.6s ease-out forwards;
+  opacity: 0;
+  transition: all 0.3s ease;
 }
 
 .book-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(168, 85, 247, 0.3);
+  transform: translateY(-6px);
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
 }
 
-/* Book cover section */
-.book-cover-section {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
+/* Book cover */
 .book-cover {
   width: 6rem;
   height: 8rem;
+  border-radius: 0.5rem;
   object-fit: cover;
-  border-radius: 0.5rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
+  margin-bottom: 1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-.book-card:hover .book-cover {
-  transform: scale(1.05);
-}
-
-.no-cover {
-  width: 6rem;
-  height: 8rem;
-  background: linear-gradient(135deg, #374151, #1f2937);
-  border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  border: 2px dashed rgba(255, 255, 255, 0.3);
-}
-
-.book-icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.7;
-}
-
-.no-cover-text {
-  font-size: 0.75rem;
-  color: #9ca3af;
-  margin: 0;
-  text-align: center;
-}
-
-/* Book info */
-.book-info {
-  flex: 1;
-  margin-bottom: 1.5rem;
-}
-
+/* Info */
 .book-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: white;
-  margin: 0 0 0.75rem 0;
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
+  line-height: 1.4;
 }
 
 .book-author {
-  font-size: 1rem;
-  color: #d1d5db;
-  margin: 0 0 1rem 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.75rem;
 }
 
 .book-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
 }
 
-.publish-year,
-.genre {
-  font-size: 0.875rem;
-  color: #9ca3af;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* Add button */
+/* ===============================
+   Add Button
+================================= */
 .add-button {
-  width: 100%;
-  background: linear-gradient(to right, #7c3aed, #a855f7);
-  color: white;
+  background: linear-gradient(to right, var(--color-accent-start), var(--color-accent-end));
+  color: #fff;
   font-weight: 600;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem;
   border-radius: 0.75rem;
   border: none;
   cursor: pointer;
@@ -326,88 +194,24 @@
 }
 
 .add-button:hover {
-  background: linear-gradient(to right, #6d28d9, #9333ea);
-  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+  background: linear-gradient(to right, var(--color-accent-hover), var(--color-accent-end));
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
 }
 
 .add-button:active {
   transform: translateY(0);
 }
 
-.button-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.button-icon {
-  font-size: 1rem;
-}
-
-/* Responsive design */
+/* ===============================
+   Responsive
+================================= */
 @media (max-width: 768px) {
-  .page-title {
-    font-size: 2.5rem;
-  }
-  
-  .page-subtitle {
-    font-size: 1.125rem;
-  }
-  
-  .search-input {
-    font-size: 1rem;
-    padding: 0.875rem 0.875rem 0.875rem 3rem;
-  }
-  
-  .results-container {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-  
-  .book-card {
-    padding: 1.25rem;
-  }
+  .page-title { font-size: 2.25rem; }
+  .results-container { gap: 1rem; }
 }
 
 @media (max-width: 480px) {
-  .search-header {
-    padding: 2rem 1rem 1.5rem;
-  }
-  
-  .page-title {
-    font-size: 2rem;
-  }
-  
-  .search-section {
-    padding: 0 1rem 1.5rem;
-  }
-  
-  .results-section {
-    padding: 0 1rem 3rem;
-  }
-  
-  .results-container {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .book-card {
-    padding: 1rem;
-  }
-  
-  .book-cover,
-  .no-cover {
-    width: 5rem;
-    height: 7rem;
-  }
-  
-  .book-title {
-    font-size: 1.125rem;
-  }
-  
-  .book-author {
-    font-size: 0.875rem;
-  }
+  .search-container { margin: 1.5rem auto; }
+  .results-container { grid-template-columns: 1fr; }
 }
