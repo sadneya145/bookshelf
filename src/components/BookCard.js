@@ -2,28 +2,38 @@ import React, { useState, useEffect } from "react";
 
 const BookCard = ({ book, onToggle }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setIsFavorite(savedFavorites.some((fav) => fav.key === book.key));
+
+    const savedRatings = JSON.parse(localStorage.getItem("ratings")) || {};
+    if (savedRatings[book.key]) {
+      setRating(savedRatings[book.key]);
+    }
   }, [book.key]);
 
   const toggleFavorite = () => {
     let savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
     if (isFavorite) {
-      // Remove from favorites
       savedFavorites = savedFavorites.filter((fav) => fav.key !== book.key);
     } else {
-      // Add to favorites
       savedFavorites.push(book);
     }
 
     localStorage.setItem("favorites", JSON.stringify(savedFavorites));
     setIsFavorite(!isFavorite);
 
-    // Notify parent to refresh (only if passed)
     if (onToggle) onToggle();
+  };
+
+  const handleRating = (newRating) => {
+    setRating(newRating);
+    let savedRatings = JSON.parse(localStorage.getItem("ratings")) || {};
+    savedRatings[book.key] = newRating;
+    localStorage.setItem("ratings", JSON.stringify(savedRatings));
   };
 
   return (
@@ -32,9 +42,27 @@ const BookCard = ({ book, onToggle }) => {
       <h3>{book.title}</h3>
       <p>{book.author}</p>
 
+      {/* Favorite Button */}
       <button onClick={toggleFavorite}>
         {isFavorite ? "❤️ Remove Favorite" : "🤍 Add Favorite"}
       </button>
+
+      {/* Rating System */}
+      <div className="rating">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span
+            key={star}
+            style={{
+              cursor: "pointer",
+              color: star <= rating ? "gold" : "gray",
+              fontSize: "20px",
+            }}
+            onClick={() => handleRating(star)}
+          >
+            ★
+          </span>
+        ))}
+      </div>
     </div>
   );
 };
